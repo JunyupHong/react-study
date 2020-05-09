@@ -1,0 +1,82 @@
+* {
+    box-sizing: border-box;
+}
+.week1 {
+    width: 100%;
+    height: 100%;
+    .content-wrapper {
+        height: 100%;
+        padding: 20px 40px;
+        display: flex;
+        flex-direction: column;
+        .title-area {
+            display: flex;
+            color: #eee;
+            margin-bottom: 24px;
+            .title {
+                font-size: 48px;
+                font-weight: 800;
+            }
+            .desc {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                margin-left: 24px;
+                font-size: 20px;
+            }
+        }
+        .start-button {
+            width: 100px;
+            height: 28px;
+            background-color: white;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 28px;
+            font-size: 20px;
+            border: solid 1px;
+            &:hover {
+                cursor: pointer;
+                background-color: #282c34;
+                color: #ddd;
+            }
+        }
+        .content-area {
+            flex: 1;
+            display: flex;
+            margin: 32px 0;
+            .content {
+                height: 100%;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                border: solid 1px;
+                padding: 12px 16px 32px;
+                .content-name {
+                    display: 1;
+                    font-size: 24px;
+                    color: #eee;
+                    padding-bottom: 24px;
+                }
+                .content-item-area {
+                    flex: 1;
+                    width: 92%;
+                    max-height: 660px;
+                    margin: 0 auto;
+                    border: solid 1px;
+                    overflow-y: auto;
+                    .content-item {
+                        color: white;
+                        font-size: 12px;
+                        padding: 12px;
+                        font-weight: 700;
+                        &:hover {
+                            cursor: pointer;
+                            background: #ddd;
+                            color: #282c34;
+                        }
+                    }
+                }
+            }
+        }
+    }   
+}

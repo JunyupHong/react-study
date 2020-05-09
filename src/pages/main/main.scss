@@ -1,0 +1,57 @@
+
+.main {
+  text-align: center;
+  height: 100%;
+}
+
+.main-logo {
+  height: 20vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .main-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.main-contents {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  .main-link {
+    color: #61dafb;
+    font-size: 20px;
+  }
+
+
+  .project-list {
+    margin: 32px 0;
+    height: 300px;
+    min-width: 280px;
+    overflow-y: auto;
+    background: #ddd;
+    color: #282c34;
+    
+    .project {
+      padding: 8px 0;
+      font-size: 24px;
+      border : solid 1px white;
+      &:hover {
+        cursor: pointer;
+        background: #282c34;
+        color: #ddd;
+      }
+    }
+  }
+  .project-list::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
+
