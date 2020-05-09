@@ -1,8 +1,19 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
+import ReactDOM from 'react-dom';
 import './week1.scss';
 import axios from 'axios';
 import contriesData from 'src/data/contries.js';
+import ContentItemArea from 'src/component/contentItemArea';
 
+// function ContentItemArea(data, k, func) {
+//     return (
+//         <div className="content-item-area">
+//             {data.get(k).map(val => <div className="content-item" key={val.value}
+//             onClick={() => {func(val.value)}}>{val.value}</div>)}
+//         </div>
+//     );
+    
+// };
 
 function Week1() {
     let [data, setData] = useState(new Map([
@@ -13,6 +24,10 @@ function Week1() {
             ['players', []]
         ]
     ));
+    let [countries, setCountries] = useState(contriesData.map(c => Object.assign(c, {value: c.country})));
+    let [leagues, setLeagues] = useState([]);
+    let [teams, setTeams] = useState([]);
+    let [players, setPlayers] = useState([]);
 
     // useEffect(() => {
     //     (async () => {
@@ -47,14 +62,42 @@ function Week1() {
                 "x-rapidapi-key":"42b39433a312a5d95afb27a2ba7cee4e",
                 }
             });
-        setData(data.set('leagues', res.data.api.leagues.map(v => Object.assign(v, {value: v.name}))));
-        console.log('1', data);
+        // setData(data.set('leagues', res.data.api.leagues.map(v => Object.assign(v, {value: v.name}))));
+        setLeagues(res.data.api.leagues.map(v => Object.assign(v, {value: v.name})));
+        setTeams([]);
+        setPlayers([]);
+        console.log('??', leagues.map(l => l));
     };
-    useEffect(() => {
-        console.log(data);
-        // document.contentItemArea.child({data.get(key).map(val => <div className="content-item" key={val.value}
-        // onClick={() => {clickCountry(val.value)}}>{val.value}</div>)});
-    }, [data]);
+    const clickLeague = async (leagueID) => {
+        console.log(leagueID);
+        
+        const res = await axios({
+            method:"GET",
+            url: `https://v2.api-football.com/teams/league/${leagueID}`,
+            headers:{
+                "content-type":"application/octet-stream",
+                "x-rapidapi-key":"42b39433a312a5d95afb27a2ba7cee4e",
+                }
+            });
+        setTeams(res.data.api.teams.map(v => Object.assign(v, {value: v.name})));
+        setPlayers([]);
+        console.log('??teams', teams);
+    };
+    const clickTeam = async (teamID) => {
+        console.log(teamID);
+        
+        const res = await axios({
+            method:"GET",
+            url: `https://v2.api-football.com/players/squad/${teamID}/2019`,
+            headers:{
+                "content-type":"application/octet-stream",
+                "x-rapidapi-key":"42b39433a312a5d95afb27a2ba7cee4e",
+                }
+            });
+            console.log(res);
+        setPlayers(res.data.api.players.map(v => Object.assign(v, {value: v.player_name + ' / ' + v.position + ' / '+ v.nationality + ' / ' + v.age})));
+        console.log('??players', players);
+    };
 
     return (
         <div className="week1">
@@ -65,7 +108,34 @@ function Week1() {
                 </div>
                 {/* <div className="start-button" onClick={getCountries}>start</div> */}
                 <div className="content-area">
-                    { [...data.keys()].map(key =>
+                    <div className={'content countries'} >
+                        <div className="content-name">countries</div>
+                        <div className="content-item-area">
+                            {countries.map((val, i) => <div className="content-item" key={val.value + '-' + i}
+                                onClick={() => {clickCountry(val.value)}}>{val.value}</div>)}
+                        </div>
+                    </div>
+                    <div className={'content leagues'} >
+                        <div className="content-name">leagues</div>
+                        <div className="content-item-area">
+                            {leagues.map((val, i) => <div className="content-item" key={val.value + '-' + i}
+                                onClick={() => {clickLeague(val.league_id)}}>{val.value + ' - ' + val.league_id}</div>)}
+                        </div>
+                    </div>
+                    <div className={'content teams'} >
+                        <div className="content-name">teams</div>
+                        <div className="content-item-area">
+                            {teams.map(val => <div className="content-item" key={val.value}
+                                onClick={() => {clickTeam(val.team_id)}}>{val.value + ' - ' + val.team_id}</div>)}
+                        </div>
+                    </div>
+                    <div className={'content players'} >
+                        <div className="content-name">players</div>
+                        <div className="content-item-area">
+                            {players.map(val => <div className="content-item" key={val.value}>{val.value}</div>)}
+                        </div>
+                    </div>
+                    {/* { [...data.keys()].map(key =>
                         <div className={'content ' + key} key={key}>
                             <div className="content-name">{key}</div>
                             <div className="content-item-area">
@@ -73,7 +143,7 @@ function Week1() {
                                     onClick={() => {clickCountry(val.value)}}>{val.value}</div>)}
                             </div>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>
