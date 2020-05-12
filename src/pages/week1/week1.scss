@@ -25,31 +25,15 @@
                 font-size: 20px;
             }
         }
-        .start-button {
-            width: 100px;
-            height: 28px;
-            background-color: white;
-            border-radius: 8px;
-            text-align: center;
-            line-height: 28px;
-            font-size: 20px;
-            border: solid 1px;
-            &:hover {
-                cursor: pointer;
-                background-color: #282c34;
-                color: #ddd;
-            }
-        }
         .content-area {
             flex: 1;
             display: flex;
-            margin: 32px 0;
+            margin: 32px 0 0 0;
             .content {
-                height: 100%;
                 flex: 1;
                 display: flex;
                 flex-direction: column;
-                border: solid 1px;
+                border: double 3px;
                 padding: 12px 16px 32px;
                 .content-name {
                     display: 1;
@@ -58,11 +42,9 @@
                     padding-bottom: 24px;
                 }
                 .content-item-area {
-                    flex: 1;
                     width: 92%;
-                    max-height: 660px;
-                    margin: 0 auto;
-                    border: solid 1px;
+                    height: calc(100vh - 250px);
+                    border: dashed 1px #444;
                     overflow-y: auto;
                     .content-item {
                         color: white;
@@ -75,6 +57,9 @@
                             color: #282c34;
                         }
                     }
+                }
+                .content-item-area::-webkit-scrollbar {
+                    display: none;
                 }
             }
         }
