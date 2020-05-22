@@ -71,7 +71,7 @@ function Week1() {
     };
     const getTeams = async (leagueID) => {
         console.log(leagueID);
-        
+        setLoading(true);
         const res = await axios({
             method:"GET",
             url: `https://v2.api-football.com/teams/league/${leagueID}`,
@@ -83,10 +83,11 @@ function Week1() {
         setTeams(res.data.api.teams.map(v => Object.assign(v, {value: v.name})));
         setPlayers([]);
         console.log('teams', teams);
+        setLoading(false);
     };
     const getPlayers = async (teamID) => {
         console.log(teamID);
-        
+        setLoading(true);
         const res = await axios({
             method:"GET",
             url: `https://v2.api-football.com/players/squad/${teamID}/2019`,
@@ -97,6 +98,7 @@ function Week1() {
             });
         setPlayers(res.data.api.players.map(v => Object.assign(v, {value: v.player_name + ' / ' + v.position + ' / '+ v.nationality + ' / ' + v.age})));
         console.log('players', players);
+        setLoading(false);
     };
 
     return (
