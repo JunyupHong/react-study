@@ -19,7 +19,7 @@ export default function LoadingFull(props) {
     // 이렇게 ㅆ는게 아닌가?
     useEffect(() => {
        setOn(props.on);
-       console.log(props.on);
+       console.log('loading', props.on);
     }, [props.on]);
     
     return (

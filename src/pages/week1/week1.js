@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react';
 import './week1.scss';
 import axios from 'axios';
 import contriesData from 'src/data/contries.js';
