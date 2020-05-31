@@ -1,6 +1,6 @@
 import React , { useState, useEffect }from 'react';
 import './loadingFull.scss';
-import loading from 'src/asset/loading.gif';
+import loading from '../../asset/loading.gif';
 
 export default function LoadingFull(props) {
     let [message, setMessage] = useState(props.initMsg);

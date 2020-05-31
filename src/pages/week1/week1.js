@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import './week1.scss';
 import axios from 'axios';
-import contriesData from 'src/data/contries.js';
-import ContentItemArea from 'src/component/contentItemArea/contentItemArea';
-import LoadingFull from 'src/component/loading/loadingFull.js';
+import contriesData from '../../data/contries.js';
+import ContentItemArea from '../../component/contentItemArea/contentItemArea';
+import LoadingFull from '../../component/loading/loadingFull.js';
+import DetailView from '../../component/detailView/detailView.tsx';
 
 function Week1() {
 
@@ -11,12 +12,28 @@ function Week1() {
         "content-type":"application/octet-stream",
         "x-rapidapi-key":"42b39433a312a5d95afb27a2ba7cee4e",
     };
-    let [countries, setCountries] = useState(contriesData.map(c => Object.assign(c, {value: c.country})));
+    let [countries] = useState(contriesData.map(c => Object.assign(c, {value: c.country})));
     let [leagues, setLeagues] = useState([]);
     let [teams, setTeams] = useState([]);
     let [players, setPlayers] = useState([]);
 
     let [loadingOn, setLoading] = useState(false);
+
+    let [detailViewOn, setDetailViewOn] = useState(false);
+    let [playerData, setPlayerData] = useState({
+            player_id: 0,
+            firstname: '',
+            lastname: '',
+            playername: '',
+            age: 0,
+            nationality: '',
+            birth_country: '',
+            birth_data: '',
+            position: '',
+            weight: '',
+            height: '',
+            number: null
+        });
 
     // useEffect(() => {
     //     (async () => {
@@ -79,8 +96,14 @@ function Week1() {
         setLoading(false);
     };
 
+    const setPlayer = (item) => {
+        console.error(item);
+        setPlayerData(item);
+        setDetailViewOn(true);
+    }
     return (
         <div className="week1">
+            <DetailView playerData={playerData} show={detailViewOn} closeFunc={() => {setDetailViewOn(false)}}></DetailView>
             <LoadingFull on={loadingOn} initMsg='loading'></LoadingFull>
             <div className="content-wrapper">
                 <div className="title-area">
@@ -91,7 +114,7 @@ function Week1() {
                     <ContentItemArea title='countries' items={countries} clickEvent={getLeagues}></ContentItemArea>
                     <ContentItemArea title='leagues' items={leagues} clickEvent={getTeams}></ContentItemArea>
                     <ContentItemArea title='teams' items={teams} clickEvent={getPlayers}></ContentItemArea>
-                    <ContentItemArea title='players' items={players} clickEvent={() => {console.log(players)}}></ContentItemArea>
+                    <ContentItemArea title='players' items={players} clickEvent={setPlayer}></ContentItemArea>
                 </div>
             </div>
         </div>
