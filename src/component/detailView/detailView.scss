@@ -36,18 +36,20 @@
             }
         }
         .desc-area {
-            padding: 24px 8px;
+            padding: 16px 8px;
             flex: 1;
             display: flex;
             flex-direction: column;
             overflow: auto;
             .desc-item {
-                padding: 8px 0;
+                padding: 10px 0;
                 display: flex;
                 color: #282c34;
+                border-bottom: dashed 1px;
                 .key {
                     margin-right: 12px;
                     font-size: 16px;
+                    line-height: 24px;
                 }
                 .value {
                     font-size: 20px;

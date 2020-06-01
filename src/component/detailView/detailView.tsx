@@ -19,7 +19,6 @@ interface PlayerData {
 }
 
 export default function DetailView(props: {playerData: PlayerData, show: boolean, closeFunc: () => void}): JSX.Element {
-    console.log(props);
     let [display, setDisplay] = useState<boolean>(props.show);
 
     useEffect(() => {
@@ -28,7 +27,7 @@ export default function DetailView(props: {playerData: PlayerData, show: boolean
 
 
     return <div className="detail-view" style={{display: display ? 'flex' : 'none'}} onClick={props.closeFunc}>
-                <div className="detail-content-area">
+                <div className="detail-content-area" onClick={(event) => {event.stopPropagation();}}>
                     <div className="title-area">
                         <div className="title">{props.playerData.player_name}</div>
                         <div className="id">&nbsp;&nbsp;&nbsp; ( {props.playerData.player_id} )</div>
@@ -44,4 +43,3 @@ export default function DetailView(props: {playerData: PlayerData, show: boolean
                 </div>
             </div>;
 }
-

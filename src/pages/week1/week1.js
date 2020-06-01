@@ -97,7 +97,7 @@ function Week1() {
     };
 
     const setPlayer = (item) => {
-        console.error(item);
+        console.log('set player', item);
         setPlayerData(item);
         setDetailViewOn(true);
     }
