@@ -22,6 +22,7 @@
             height: 80px;
             display: flex;
             border-bottom: solid 2px #444;
+            border: solid 1px;
             
             .title {
                 font-size: 36px;
@@ -33,6 +34,14 @@
                 line-height: 100px;
                 font-weight: 500;
                 color: #555;
+            }
+            .star {
+                width: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: yellow;
+                font-size: 32px;
             }
         }
         .desc-area {
