@@ -1,8 +1,8 @@
-const add = (playerId: string) => {
-    return { type: 'add', playerId };
+const add = (playerData: {}) => {
+    return { type: 'add', playerData };
 };
-const remove = (playerId: string) => {
-    return { type: 'remove', playerId };
+const remove = (playerData: {}) => {
+    return { type: 'remove', playerData };
 }
 
 export default {

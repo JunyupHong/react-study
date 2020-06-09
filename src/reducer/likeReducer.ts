@@ -1,9 +1,9 @@
-const likeReducer = (state: Array<{ playerId: string }> = [], action: { type: 'add' | 'remove', playerId: string }) => {
+const likeReducer = (state: Array<{ playerData: {player_id: string} }> = [], action: { type: 'add' | 'remove', playerData: {player_id: string} }) => {
     switch (action.type) {
         case 'add':
-            return state.concat([{ playerId: action.playerId }]);
+            return state.concat([{ playerData: action.playerData }]);
         case 'remove':
-            return state.filter(s => s.playerId !== action.playerId);
+            return state.filter(s => s.playerData.player_id !== action.playerData.player_id);
         default:
             return state;
     }

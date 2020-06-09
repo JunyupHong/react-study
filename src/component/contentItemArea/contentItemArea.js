@@ -13,10 +13,12 @@ function ContentItemArea(props) {
         let ele = <div></div>;
         if (props.items.length !== 0) {
             ele = props.items.map((val, i) => <div className="content-item" key={props.title + '-' + i}
+                        like={props}
                         onClick={() => { if (props.title === 'leagues') props.clickEvent(val.league_id);
-                        else if (props.title === 'teams') props.clickEvent(val.team_id);
-                        else if (props.title === 'players') props.clickEvent(val);
-                        else props.clickEvent(val.value); }}>{val.value}</div>);
+                            else if (props.title === 'teams') props.clickEvent(val.team_id);
+                            else if (props.title === 'players') props.clickEvent(val);
+                            else props.clickEvent(val.value); }}>
+                    {val.value}</div>);
         }
         return ele;
     }, [props]);
@@ -25,7 +27,7 @@ function ContentItemArea(props) {
         <div className={'content ' + props.title}>
             <div className="content-item">
                 <div className="content-name">{props.title}</div>
-                    <div className="content-item-area">
+                    <div className={'content-item-area ' + props.title}>
                         {element}
                         {/* {props.items.map((val, i) => <div className="content-item" key={props.title + '-' + i}
                         // onClick={() => {

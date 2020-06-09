@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './detailView.scss';
 
-import { StarOutlined, StarFilled, StarTwoTone } from '@ant-design/icons';
+import { StarOutlined, StarFilled } from '@ant-design/icons';
 
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -27,13 +27,12 @@ interface PlayerData {
 export default function DetailView(props: {playerData: PlayerData, show: boolean, closeFunc: () => void}): JSX.Element {
     let [display, setDisplay] = useState<boolean>(props.show);
     
-    const dispatch = useDispatch();    
-    const like = useSelector((state: {like: Array<{playerId: string}>}) => state.like).filter(ele => ele.playerId === props.playerData.player_id + '');
+    const dispatch = useDispatch();
+    const like = useSelector((state: {like: Array<{playerData: {player_id: string}}>}) => state.like).filter(ele => ele.playerData.player_id + '' === props.playerData.player_id + '');
     
     useEffect(() => {
         props.show ? setDisplay(true) : setDisplay(false);
     }, [props.show]);
-
 
     return <div className="detail-view" style={{display: display ? 'flex' : 'none'}} onClick={props.closeFunc}>
                 <div className="detail-content-area" onClick={(event) => {event.stopPropagation();}}>
@@ -43,9 +42,9 @@ export default function DetailView(props: {playerData: PlayerData, show: boolean
                         <div style={{'flex': 1}}></div>
                         <div className="star">
                             <StarOutlined style={{display: like.length !== 0 ? 'none': 'block' }}
-                                onClick={() => {dispatch(action.Like.add(props.playerData.player_id + ''))}}/>
+                                onClick={() => {dispatch(action.Like.add(props.playerData))}}/>
                             <StarFilled style={{display: like.length !== 0 ? 'block': 'none' }}
-                                onClick={() => {dispatch(action.Like.remove(props.playerData.player_id + ''))}}/>
+                                onClick={() => {dispatch(action.Like.remove(props.playerData))}}/>
                             </div>
                     </div>
                     <div className="desc-area">
