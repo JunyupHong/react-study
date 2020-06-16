@@ -7,22 +7,7 @@ import { StarOutlined, StarFilled } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import action from '../../action';
 
-
-interface PlayerData {
-    player_id: number;
-    firstname: string;
-    lastname: string;
-    player_name: string;
-    age: number;
-    nationality: string;
-    birth_country: string;
-    birth_data: string;
-
-    position: string;
-    weight: string;
-    height: string;
-    number: null | number;
-}
+import {PlayerData} from '../../type';
 
 export default function DetailView(props: {playerData: PlayerData, show: boolean, closeFunc: () => void}): JSX.Element {
     let [display, setDisplay] = useState<boolean>(props.show);

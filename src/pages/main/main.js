@@ -3,7 +3,7 @@ import logo from '../../asset/logo.svg';
 import './main.scss';
 
 function Main({history}) {
-    const projects = [ 'week1' ];
+    const projects = [ 'search', 'likes' ];
     return (
         <div className="main">
             <div className="main-contents">

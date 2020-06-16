@@ -1,4 +1,5 @@
-const likeReducer = (state: Array<{ playerData: {player_id: string} }> = [], action: { type: 'add' | 'remove', playerData: {player_id: string} }) => {
+import {PlayerData} from '../type';
+const likeReducer = (state: Array<{ playerData: PlayerData }> = [], action: { type: 'add' | 'remove', playerData: PlayerData }) => {
     switch (action.type) {
         case 'add':
             return state.concat([{ playerData: action.playerData }]);

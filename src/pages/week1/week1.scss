@@ -11,6 +11,7 @@
         flex-direction: column;
         .title-area {
             display: flex;
+            align-items: flex-end;
             color: #eee;
             margin-bottom: 24px;
             .title {
@@ -23,6 +24,21 @@
                 justify-content: flex-end;
                 margin-left: 24px;
                 font-size: 20px;
+            }
+            .like-button {
+                width: 100px;
+                height: 30px;
+                border-radius: 5px;
+                text-align: center;
+                line-height: 30px;
+                background: #282c34;
+                color: #ddd;
+                border: #ddd solid 1px;
+                &:hover {
+                    cursor: pointer;
+                    color: #282c34;                    
+                    background: #ddd;
+                }
             }
         }
         .content-area {

@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './week1.scss';
 import axios from 'axios';
-import contriesData from '../../data/contries.js';
+
 import ContentItemArea from '../../component/contentItemArea/contentItemArea';
 import LoadingFull from '../../component/loading/loadingFull.js';
 import DetailView from '../../component/detailView/detailView.tsx';
+import getCountries from '../../sagas';
 
-function Week1() {
+import { useSelector } from 'react-redux';
+
+function Week1({history}) {
 
     const headers = {
         "content-type":"application/octet-stream",
         "x-rapidapi-key":"42b39433a312a5d95afb27a2ba7cee4e",
     };
-    let [countries] = useState(contriesData.map(c => Object.assign(c, {value: c.country})));
+    
+    // let [countries, setCountries] = useState([]);
+    const countries = useSelector((state) => state.countries.map(c => Object.assign(c, {value: c.country})));
+    // let [countries] = useState(contriesData.map(c => Object.assign(c, {value: c.country})));
     let [leagues, setLeagues] = useState([]);
     let [teams, setTeams] = useState([]);
     let [players, setPlayers] = useState([]);
@@ -35,12 +41,10 @@ function Week1() {
             number: null
         });
 
-    // useEffect(() => {
-    //     (async () => {
-    //         const res = await getCountries();
-    //         setData(data.set('countries', res.data.api.countries.map(v => Object.assign(v, {value: v.country}))));
-    //     })();
-    // }, []);
+    useEffect(() => {
+        getCountries('FETCH_COUNTRIES_REQUEST');
+    }, []);
+    
     // const getCountries = async() => {
     //     const res = await axios({
     //         method:"GET",
@@ -57,7 +61,6 @@ function Week1() {
     
     const getLeagues = async (country) => {
         setLoading(true);
-        
         const res = await axios({
             method:"GET",
             url: `https://v2.api-football.com/leagues/country/${country}`,
@@ -109,6 +112,8 @@ function Week1() {
                 <div className="title-area">
                     <div className="title">Football API</div>
                     <div className="desc">www.api-football.com</div>
+                    <div style={{'flex': 1}}></div>
+                    <div className="like-button" onClick={() => history.push('likes')}>likes</div>
                 </div>
                 <div className="content-area">   
                     <ContentItemArea title='countries' items={countries} clickEvent={getLeagues}></ContentItemArea>

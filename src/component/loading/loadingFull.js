@@ -7,15 +7,16 @@ export default function LoadingFull(props) {
     let [on, setOn] = useState(props.on);
     useEffect(() => {
         let tick = 0;
-        setInterval(() => {
+        const intervalId = setInterval(() => {
             tick++;
             let msg = props.initMsg;
             for (let i = 0; i <= tick % 3; i++) {
                 msg += '.';
             }
             setMessage(msg);
-         }, 600);
-    }, []);
+        }, 600);
+        return clearInterval(intervalId);
+    }, [props.initMsg]);
     // 이렇게 ㅆ는게 아닌가?
     useEffect(() => {
        setOn(props.on);
@@ -30,5 +31,4 @@ export default function LoadingFull(props) {
             <div className="message">{message}</div>
         </div>
     );
-    
 };
